@@ -1,7 +1,7 @@
 import React from 'react';
-import Header from './Header';
-import Navigation from './Navigation';
-import MainContent from './MainContent';
+import Header from './components/Header';
+import Navigation from './components/Navigation';
+import MainContent from './components/MainContent';
 
 const Dashboard = () => {
   return (
