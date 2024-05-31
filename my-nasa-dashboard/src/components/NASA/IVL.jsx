@@ -1,6 +1,6 @@
 // ImageRepositorySection.jsx
 import React, { useState, useEffect } from 'react';
-import { searchImages, getAssetManifest, getAssetMetadata, getVideoCaptions } from '../../services/ImageRepositoryService';
+import { searchImages, getAssetManifest, getAssetMetadata, getVideoCaptions } from '../../services/IVLService';
 
 const ImageRepositorySection = () => {
   const [searchResults, setSearchResults] = useState(null);

@@ -1,6 +1,6 @@
 // SatelliteSituationCenterSection.jsx
 import React, { useState, useEffect } from 'react';
-import { echoDataRequest, echoGraphRequest, echoQueryRequest } from '../../services/SatelliteSituationCenterService';
+import { echoDataRequest, echoGraphRequest, echoQueryRequest } from '../../services/SSCService';
 
 const SatelliteSituationCenterSection = () => {
   const [dataRequestResponse, setDataRequestResponse] = useState(null);

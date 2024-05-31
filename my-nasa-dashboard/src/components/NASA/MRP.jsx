@@ -1,6 +1,6 @@
 // RoverPhotosSection.jsx
 import React, { useState, useEffect } from 'react';
-import { fetchRoverPhotos } from '../../services/RoverPhotosService';
+import { fetchRoverPhotos } from '../../services/MRPService';
 
 const RoverPhotosSection = () => {
   const [roverPhotos, setRoverPhotos] = useState(null);

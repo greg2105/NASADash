@@ -1,22 +1,27 @@
-// ExoplanetSection.jsx
 import React, { useState, useEffect } from 'react';
-import { fetchExoplanetData } from '../../services/ExoplanetService';
+import { fetchExoplanetDataFromAPI } from '../../services/ExoplanetService';
 
-const ExoplanetSection = () => {
+const Exoplanet = () => {
   const [exoplanetData, setExoplanetData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // Construct the ADQL query
+        const query = `
+          SELECT pl_name, pl_masse, ra, dec
+          FROM ps
+          WHERE upper(soltype) LIKE '%CONF%'
+            AND pl_masse BETWEEN 0.5 AND 2.0
+        `;
+
         // Fetch data from the Exoplanet Archive API
-        const query = 'table=exoplanets&format=ipac&where=pl_kepflag=1';
-        const data = await fetchExoplanetData(query);
+        const data = await fetchExoplanetDataFromAPI(query, 'votable');
         setExoplanetData(data);
       } catch (error) {
         console.error('Error fetching exoplanet data:', error);
       }
     };
-
     fetchData();
   }, []);
 
@@ -34,4 +39,4 @@ const ExoplanetSection = () => {
   );
 };
 
-export default ExoplanetSection;
+export default Exoplanet;

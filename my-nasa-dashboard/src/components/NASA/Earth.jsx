@@ -49,8 +49,8 @@ const Earth = () => {
       </form>
       {earthData && (
         <div>
-          <img src={earthData.url} alt="Earth Imagery" />
-          <p>Date: {earthData.date}</p>
+          {earthData.url && <img src={earthData.url} alt="Earth Imagery" />}
+          {earthData.date && <p>Date: {earthData.date}</p>}
         </div>
       )}
     </div>

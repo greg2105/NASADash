@@ -1,11 +1,11 @@
 // ExoplanetService.js
-const API_URL = 'https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI';
+const API_URL = 'http://localhost:5000/api/exoplanets';
 
-export const fetchExoplanetData = async (query) => {
+export const fetchExoplanetDataFromAPI = async () => {
   try {
-    const response = await fetch(`${API_URL}?${query}`);
-    const data = await response.text();
-    return data;
+    const response = await fetch(API_URL);
+    const data = await response.json();
+    return data.data;
   } catch (error) {
     console.error('Error fetching exoplanet data:', error);
     throw error;

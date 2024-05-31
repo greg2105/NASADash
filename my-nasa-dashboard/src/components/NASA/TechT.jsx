@@ -1,6 +1,6 @@
 // TechTransferSection.jsx
 import React, { useState, useEffect } from 'react';
-import { searchPatents, searchSoftware, searchSpinoffs } from '../../services/TechTransferService';
+import { searchPatents, searchSoftware, searchSpinoffs } from '../../services/TechTService';
 
 const TechTransferSection = () => {
   const [patentResults, setPatentResults] = useState(null);

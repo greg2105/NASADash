@@ -1,0 +1,4 @@
+Textport requires the user to authorize themselves through the
+techport website, then copying a new API key each time they
+access the API. Since there is no morally correct way to programmatically
+complete this process, I am leaving this out of the project.
