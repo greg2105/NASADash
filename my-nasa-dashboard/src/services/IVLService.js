@@ -5,6 +5,7 @@ export const searchImages = async (query) => {
   try {
     const response = await fetch(`${API_URL}/search?q=${query}`);
     const data = await response.json();
+    console.log(data);
     return data;
   } catch (error) {
     console.error('Error searching images:', error);

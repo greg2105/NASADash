@@ -20,7 +20,6 @@ const RoverPhotosSection = () => {
         console.error('Error fetching rover photos:', error);
       }
     };
-
     fetchData();
   }, []);
 
@@ -29,8 +28,15 @@ const RoverPhotosSection = () => {
       {roverPhotos ? (
         <div>
           <h2>Mars Rover Photos</h2>
-          {/* Render rover photos here */}
-          {/* You can access the photos using roverPhotos */}
+          {roverPhotos.map((photo, index) => (
+            <div key={index}>
+              <img src={photo.img_src} alt={`Rover Photo ${index}`} />
+              <p>Camera: {photo.camera.full_name}</p>
+              <p>Rover: {photo.rover.name}</p>
+              <p>Sol: {photo.sol}</p>
+              <p>Earth Date: {photo.earth_date}</p>
+            </div>
+          ))}
         </div>
       ) : (
         <p>Loading...</p>
