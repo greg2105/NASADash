@@ -1,8 +1,28 @@
-# exoplanet_api.py
-from pyvo.dal import tap
+import pyvo as vo
 
 # Set up the TAP service
-tap_service = tap.TAPService("https://exoplanetarchive.ipac.caltech.edu/TAP")
+tap_service = vo.dal.TAPService("https://exoplanetarchive.ipac.caltech.edu/TAP")
+
+# Get the available table names
+table_names = [table.name for table in tap_service.tables]
+print("Available Tables:")
+print(table_names)
+
+# Get the column information for the 'ps' table
+query = """
+SELECT column_name, datatype, description
+FROM TAP_SCHEMA.columns
+WHERE table_name = 'ps'
+"""
+columns = tap_service.run_sync(query)
+
+# Print the column information
+print("\nColumns in the 'ps' table:")
+for column in columns:
+    print(f"Column Name: {column['column_name']}")
+    print(f"Data Type: {column['datatype']}")
+    print(f"Description: {column['description']}")
+    print()
 
 # Define your TAP query
 query = """
@@ -15,16 +35,30 @@ WHERE upper(soltype) LIKE '%CONF%'
 # Execute the query
 results = tap_service.run_sync(query)
 
-# Get the column names
-column_names = [f.name for f in results.fields]
-
 # Convert the results to a list of dictionaries
 data = []
-for row in results:
-    row_dict = {}
-    for column_name in column_names:
-        row_dict[column_name] = row.getvalue(column_name)
-    data.append(row_dict)
+if hasattr(results, 'columns'):
+    for row in results:
+        row_dict = {column.name: row[column.name] for column in results.columns}
+        data.append(row_dict)
+elif hasattr(results, 'fields'):
+    column_names = [field.name for field in results.fields]
+    for row in results:
+        row_dict = {column_name: row.getvalue(column_name) for column_name in column_names}
+        data.append(row_dict)
+else:
+    # Handle the case where the TAPResults object doesn't have 'columns' or 'fields' attributes
+    try:
+        first_row = next(iter(results))
+        column_names = list(first_row.keys())
+        data.append(first_row)
+        for row in results:
+            row_dict = {column_name: row[column_name] for column_name in column_names}
+            data.append(row_dict)
+    except StopIteration:
+        print("The query returned no results.")
 
-# Print the data (you can serialize it and return it as a response instead)
-print(data)
+# Print the data
+print("Exoplanet Data:")
+for row in data:
+    print(row)
