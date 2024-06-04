@@ -126,37 +126,23 @@ def fetch_ssc_data():
         # If we have data, process it
         if locations:
             data = locations['Data'][0]
-            coords = data['Coordinates'][0]
-            
+            coords = data['Coordinates'][0] if 'Coordinates' in data and data['Coordinates'] else None
+
+        if coords:
             satellite_data[sat] = {
                 'Name': details['Name'],
-                'X': coords['X'].tolist(),
-                'Y': coords['Y'].tolist(),
-                'Z': coords['Z'].tolist(),
-                'CoordinateSystem': coords['CoordinateSystem'].value,
-                'StartTime': data['StartTime'],
-                'EndTime': data['EndTime']
+                'X': coords.get('X', []).tolist(),
+                'Y': coords.get('Y', []).tolist(),
+                'Z': coords.get('Z', []).tolist(),
+                'CoordinateSystem': getattr(coords.get('CoordinateSystem'), 'value', 'Unknown'),
+                'StartTime': data.get('StartTime') or coords.get('Time', [0]),
+                'EndTime': data.get('EndTime') or coords.get('Time', [-1])
             }
-
-            # Plot the satellite's orbit
-            fig = plt.figure(figsize=(10, 8))
-            ax = fig.add_subplot(111, projection='3d')
-            
-            ax.set_xlabel('X (km)')
-            ax.set_ylabel('Y (km)')
-            ax.set_zlabel('Z (km)')
-            
-            title = f"{data['Id']} Orbit ({coords['CoordinateSystem'].value.upper()})\n{data['StartTime']} to {data['EndTime']}"
-            ax.plot(coords['X'], coords['Y'], coords['Z'], label=title)
-            ax.legend()
-            
-            # Save the plot as an image
-            plt.savefig(f'{sat.replace(" ", "_")}_orbit.png')
-            plt.close()  # Close the figure to free up memory
-
-            print(f"  Successfully fetched and plotted data for {sat}")
+        # ... rest of the code ...
         else:
-            print(f"  No location data found for {sat}")
+            print("  No coordinate data found")
+    else:
+        print(f"  No location data found for {sat}")
 
     # Convert the data to JSON format
     json_data = json.dumps(satellite_data, indent=4)
