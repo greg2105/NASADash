@@ -1,6 +1,6 @@
 import { NASA_API_KEY } from '../constants';
 
-const API_URL = '/api';
+const API_BASE_URL = 'https://eonet.gsfc.nasa.gov/api/v3';
 
 export const fetchEONETData = async (endpoint, params = {}) => {
   try {
@@ -8,14 +8,11 @@ export const fetchEONETData = async (endpoint, params = {}) => {
       ...params,
       api_key: NASA_API_KEY,
     });
-
-    const response = await fetch(`${API_URL}/${endpoint}?${queryParams.toString()}`);
+    const response = await fetch(`${API_BASE_URL}/${endpoint}?${queryParams.toString()}`);
     console.log('Response status:', response.status);
-
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-
     const data = await response.json();
     console.log('Received data:', data);
     return data;

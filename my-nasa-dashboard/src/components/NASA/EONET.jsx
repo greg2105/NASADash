@@ -13,7 +13,6 @@ const EONET = () => {
         console.error('Error fetching EONET data:', error);
       }
     };
-
     fetchData();
   }, []);
 
@@ -26,7 +25,9 @@ const EONET = () => {
             <div key={event.id}>
               <h3>{event.title}</h3>
               <p>Category: {event.categories.join(', ')}</p>
-              <p>Date: {event.geometries[0].date}</p>
+              {event.geometry && event.geometry.length > 0 && (
+                <p>Date: {event.geometry[0].date}</p>
+              )}
               {/* Render additional event details as needed */}
             </div>
           ))}

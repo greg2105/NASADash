@@ -4,6 +4,7 @@ import APOD from './NASA/APOD';
 import DONKI from './NASA/DONKI';
 import NeoWs from './NASA/NeoWs';
 import Earth from './NASA/Earth';
+import EONET from './NASA/EONET';
 import EPIC from './NASA/EPIC';
 import Exoplanet from './NASA/Exoplanet';
 import Insight from './NASA/Insight';
@@ -31,7 +32,11 @@ const MainContent = () => {
   const [showTechTSection, setShowTechTSection] = useState(false);
   const [showTLESection, setShowTLESection] = useState(false);
   const [showWMTSSection, setShowWMTSSection] = useState(false);
-  //const [showEONETSection, setShowEONETSection] = useState(false);
+  const [showEONETSection, setShowEONETSection] = useState(false);
+
+  const handleShowEONETSection = () => {
+    setShowEONETSection(!showEONETSection);
+  };
 
   const handleShowWMTSSection = () => {
     setShowWMTSSection(!showWMTSSection);
@@ -84,10 +89,6 @@ const MainContent = () => {
   const handleShowEarthSection = () => {
     setShowEarthSection(!showEarthSection);
   };
-
-  // const handleShowEONETSection = () => {
-  //   setShowEONETSection(!showEONETSection);
-  // };
 
   return (
     <div>
@@ -195,13 +196,13 @@ const MainContent = () => {
         </button>
       )}
 
-      {/* {showEONETSection ? (
+      {showEONETSection ? (
         <EONET />
       ) : (
         <button onClick={handleShowEONETSection}>
           {showEONETSection ? 'Hide EONET Section' : 'Show EONET Section'}
         </button>
-      )} */}
+      )}
     </div>
   );
 };

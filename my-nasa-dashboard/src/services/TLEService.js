@@ -1,20 +1,20 @@
-// TLEService.js
-const API_URL = 'http://tle.ivanstanojevic.me';
+const API_URL = 'http://localhost:3000/api/tle';
 
 export const searchTLEBySatelliteName = async (query) => {
   try {
-    const response = await fetch(`${API_URL}/api/tle?search=${query}`);
+    const response = await fetch(`${API_URL}/search/${query}`);
     const data = await response.json();
     return data;
   } catch (error) {
     console.error('Error searching TLE by satellite name:', error);
+    // Don't try to log response here, it might not exist
     throw error;
   }
 };
 
 export const getTLEBySatelliteNumber = async (satelliteNumber) => {
   try {
-    const response = await fetch(`${API_URL}/api/tle/${satelliteNumber}`);
+    const response = await fetch(`${API_URL}/number/${satelliteNumber}`);
     const data = await response.json();
     return data;
   } catch (error) {

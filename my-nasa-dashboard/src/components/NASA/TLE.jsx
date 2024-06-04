@@ -1,4 +1,3 @@
-// TLESection.jsx
 import React, { useState, useEffect } from 'react';
 import { searchTLEBySatelliteName, getTLEBySatelliteNumber } from '../../services/TLEService';
 
@@ -12,8 +11,9 @@ const TLESection = () => {
         // Search for TLE records by satellite name
         const searchQuery = 'ISS';
         const searchData = await searchTLEBySatelliteName(searchQuery);
+        console.log('TLE Search Results:', searchData);
         setTleSearchResults(searchData);
-
+ 
         // Fetch TLE record by satellite number
         const satelliteNumber = '25544';
         const tleData = await getTLEBySatelliteNumber(satelliteNumber);
@@ -22,17 +22,23 @@ const TLESection = () => {
         console.error('Error fetching TLE data:', error);
       }
     };
-
     fetchData();
   }, []);
 
   return (
     <div>
-      {tleSearchResults ? (
+      {tleSearchResults && tleSearchResults.member && tleSearchResults.member.length > 0 ? (
         <div>
           <h2>TLE Search Results</h2>
-          {/* Render TLE search results here */}
-          {/* You can access the search results using tleSearchResults */}
+          {tleSearchResults.member.map((result) => (
+            <div key={result["@id"]}>
+              <h3>{result.name}</h3>
+              <p>Satellite Number: {result.satelliteId}</p>
+              <p>Line 1: {result.line1}</p>
+              <p>Line 2: {result.line2}</p>
+              {/* Add more details as needed */}
+            </div>
+          ))}
         </div>
       ) : (
         <p>Loading TLE search results...</p>
@@ -41,8 +47,13 @@ const TLESection = () => {
       {tleBySatelliteNumber ? (
         <div>
           <h2>TLE by Satellite Number</h2>
-          {/* Render TLE by satellite number here */}
-          {/* You can access the TLE data using tleBySatelliteNumber */}
+          <div>
+            <h3>{tleBySatelliteNumber.name}</h3>
+            <p>Satellite Number: {tleBySatelliteNumber.satelliteId}</p>
+            <p>Line 1: {tleBySatelliteNumber.line1}</p>
+            <p>Line 2: {tleBySatelliteNumber.line2}</p>
+            {/* Render additional details as needed */}
+          </div>
         </div>
       ) : (
         <p>Loading TLE by satellite number...</p>
