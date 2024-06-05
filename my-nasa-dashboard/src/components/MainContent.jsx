@@ -14,6 +14,7 @@ import SSC from './NASA/SSC';
 import TechT from './NASA/TechT';
 import TLE from './NASA/TLE';
 import WMTS from './NASA/WMTS';
+import SSDCNEOS from './NASA/SSDCNEOS';
 
 // EONET API is weird, commenting out those lines
 //import EONET from './NASA/EONET';
@@ -33,6 +34,11 @@ const MainContent = () => {
   const [showTLESection, setShowTLESection] = useState(false);
   const [showWMTSSection, setShowWMTSSection] = useState(false);
   const [showEONETSection, setShowEONETSection] = useState(false);
+  const [showSSDCNEOSSection, setShowSSDCNEOSSection] = useState(false);
+
+  const handleShowSSDCNEOSSection = () => {
+    setShowSSDCNEOSSection(!showSSDCNEOSSection);
+  };
 
   const handleShowEONETSection = () => {
     setShowEONETSection(!showEONETSection);
@@ -201,6 +207,14 @@ const MainContent = () => {
       ) : (
         <button onClick={handleShowEONETSection}>
           {showEONETSection ? 'Hide EONET Section' : 'Show EONET Section'}
+        </button>
+      )}
+
+      {showSSDCNEOSSection ? (
+        <SSDCNEOS />
+      ) : (
+        <button onClick={handleShowSSDCNEOSSection}>
+          {showSSDCNEOSSection ? 'Hide SSDCNEOS Section' : 'Show SSDCNEOS Section'}
         </button>
       )}
     </div>

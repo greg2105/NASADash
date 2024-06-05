@@ -1,68 +1,64 @@
 // TechTransferSection.jsx
+import { NASA_API_KEY } from '../../constants';
+
 import React, { useState, useEffect } from 'react';
-import { searchPatents, searchSoftware, searchSpinoffs } from '../../services/TechTService';
 
 const TechTransferSection = () => {
-  const [patentResults, setPatentResults] = useState(null);
-  const [softwareResults, setSoftwareResults] = useState(null);
-  const [spinoffResults, setSpinoffResults] = useState(null);
+  const [patents, setPatents] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchPatents = async () => {
       try {
-        // Search for patents
-        const patentQuery = 'engine';
-        const patentData = await searchPatents(patentQuery);
-        setPatentResults(patentData.patents);
+        setIsLoading(true);
+        setError(null);
 
-        // Search for software
-        const softwareQuery = 'mars';
-        const softwareData = await searchSoftware(softwareQuery);
-        setSoftwareResults(softwareData.software);
+        const response = await fetch(`https://api.nasa.gov/techtransfer/patent/?engine&api_key=${NASA_API_KEY}`);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
 
-        // Search for spinoffs
-        const spinoffQuery = 'water';
-        const spinoffData = await searchSpinoffs(spinoffQuery);
-        setSpinoffResults(spinoffData.spinoffs);
+        const data = await response.json();
+        setPatents(data.results || []);
       } catch (error) {
-        console.error('Error fetching tech transfer data:', error);
+        console.error('Error fetching patents:', error);
+        setError(error.message || 'Failed to fetch patents');
+      } finally {
+        setIsLoading(false);
       }
     };
 
-    fetchData();
+    fetchPatents();
   }, []);
+
+  if (isLoading) return <p>Loading NASA Tech Transfer patents...</p>;
+  if (error) return <p>Error: {error}</p>;
+  if (patents.length === 0) return <p>No patents found.</p>;
+
+  const stripHtml = (html) => {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    return doc.body.textContent || '';
+  };
 
   return (
     <div>
-      {patentResults ? (
-        <div>
-          <h2>Patent Results</h2>
-          {/* Render patent results here */}
-          {/* You can access the patent results using patentResults */}
-        </div>
-      ) : (
-        <p>Loading patent results...</p>
-      )}
-
-      {softwareResults ? (
-        <div>
-          <h2>Software Results</h2>
-          {/* Render software results here */}
-          {/* You can access the software results using softwareResults */}
-        </div>
-      ) : (
-        <p>Loading software results...</p>
-      )}
-
-      {spinoffResults ? (
-        <div>
-          <h2>Spinoff Results</h2>
-          {/* Render spinoff results here */}
-          {/* You can access the spinoff results using spinoffResults */}
-        </div>
-      ) : (
-        <p>Loading spinoff results...</p>
-      )}
+      <h1>NASA Tech Transfer Patents</h1>
+      <ul>
+        {patents.map((patent, index) => (
+          <li key={patent[0]}>
+            <h3>{stripHtml(patent[2])}</h3>
+            <p><strong>ID:</strong> {patent[0]}</p>
+            <p><strong>NASA ID:</strong> {patent[1]}</p>
+            <p><strong>Description:</strong> {stripHtml(patent[3])}</p>
+            <p><strong>Center:</strong> {patent[6]}</p>
+            <p><strong>Category:</strong> {patent[4]}</p>
+            {patent[8] && <p><strong>Image:</strong> <img src={patent[8]} alt={patent[2]} style={{ maxWidth: '300px' }} /></p>}
+            <p><strong>Relevance Score:</strong> {patent[10]}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
