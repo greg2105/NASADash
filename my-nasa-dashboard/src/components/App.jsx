@@ -1,5 +1,7 @@
+// app.jsx
 import React, { useState } from 'react';
 
+// API IMPORTS
 import APOD from './NASA/APOD';
 import DONKI from './NASA/DONKI';
 import NeoWs from './NASA/NeoWs';

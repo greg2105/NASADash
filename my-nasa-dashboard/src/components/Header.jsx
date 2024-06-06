@@ -1,11 +1,11 @@
-// Header.jsx
 import React from 'react';
+// import bannerImage from '../../assets/banner.jpg'; // Import your banner image
 
 const Header = () => {
   return (
     <header>
-      <h1>NASA Dashboard</h1>
-      {/* Add any other header content */}
+      <div className="hero-banner">
+      </div>
     </header>
   );
 };
