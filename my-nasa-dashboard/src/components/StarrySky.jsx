@@ -13,7 +13,7 @@ const StarrySky = () => {
     let centerX = canvasWidth * 0.5;
     let centerY = canvasHeight * 0.5;
 
-    let numberOfStars = 500;
+    let numberOfStars = 325;
     let stars = [];
 
     let frames_per_second = 60;
