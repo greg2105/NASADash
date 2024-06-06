@@ -21,7 +21,7 @@ import SSDCNEOS from './NASA/SSDCNEOS';
 // EONET API is weird, commenting out those lines
 //import EONET from './NASA/EONET';
 
-const MainContent = () => {
+const Buttons = () => {
   const [showDonkiSection, setShowDonkiSection] = useState(false);
   const [showAPODSection, setShowAPODSection] = useState(false);
   const [showNeoWsSection, setShowNeoWsSection] = useState(false);
@@ -223,4 +223,4 @@ const MainContent = () => {
   );
 };
 
-export default MainContent;
+export default Buttons;
