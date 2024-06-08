@@ -34,10 +34,10 @@ body, html {
 
 .astronaut-container {
   position: fixed; /* Change to fixed to escape .planet-model-container's transform */
-  left: 20px; /* Small padding from the left edge */
-  bottom: 20px; /* Small padding from the bottom edge */
+  left: -13px; /* Small padding from the left edge */
+  bottom: -87px; /* Small padding from the bottom edge */
   z-index: 3;
-  width: 200px; /* Set a fixed width for now */
+  width: 400px; /* Set a fixed width for now */
   height: auto; /* Let the height adjust based on the image's aspect ratio */
 }
 
@@ -81,13 +81,12 @@ body, html {
 
 .title-container {
   position: absolute;
-  top: 20px;
+  top: 10px;
   left: 0;
   right: 0;
   z-index: 10;
   display: flex;
   justify-content: center;
-  pointer-events: none; /* This allows clicks to pass through to the canvas below */
 }
 
 .app-title {
