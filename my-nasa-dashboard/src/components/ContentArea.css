@@ -1,0 +1,55 @@
+/* src/components/ContentArea.css */
+.content-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 120px);
+    margin-top: 0px;
+  }
+  
+  .content-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 900px;
+    width: 90%;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    color: #fff;
+    font-family: 'Roboto Condensed', sans-serif;
+    overflow-y: auto;
+    max-height: 80vh;
+  }
+  
+  .glass-panel {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
+  
+  .content-card h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #ffd700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  }
+  
+  .content-card p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-top: 20px;
+  }
+  
+  .content-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  }

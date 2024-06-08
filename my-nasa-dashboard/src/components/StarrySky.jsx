@@ -5,71 +5,51 @@ const StarrySky = () => {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const mainContext = canvas.getContext('2d');
-
+    const ctx = canvas.getContext('2d');
     let canvasWidth = canvas.width;
     let canvasHeight = canvas.height;
-
-    let centerX = canvasWidth * 0.5;
-    let centerY = canvasHeight * 0.5;
-
     let numberOfStars = 325;
     let stars = [];
+    let speed = 1; // Adjust this value to control the overall speed
 
-    let frames_per_second = 60;
-    let interval = Math.floor(1000 / frames_per_second);
-    let startTime = performance.now();
-    let previousTime = startTime;
+    const updateCanvasSize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      canvasWidth = canvas.width;
+      canvasHeight = canvas.height;
+    };
 
-    let currentTime = 0;
-    let deltaTime = 0;
-
-    function getRandomInt(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    function remap(value, start1, stop1, start2, stop2) {
-      return ((value - start1) / (stop1 - start1)) * (stop2 - start2) + start2;
-    }
+    updateCanvasSize();
+    window.addEventListener('resize', updateCanvasSize);
 
     class Star {
       constructor() {
-        this.x = getRandomInt(-centerX, centerX);
-        this.y = getRandomInt(-centerY, centerY);
-        this.counter = getRandomInt(1, canvasWidth);
-
-        this.radiusMax = 1 + Math.random() * 10;
-        this.speed = getRandomInt(1, 5);
-
-        this.context = mainContext;
+        this.x = Math.random() * canvasWidth;
+        this.y = Math.random() * canvasHeight;
+        this.radius = Math.random() * 2; // Adjust this value to control the star size
+        this.vx = 0; // No horizontal velocity
+        this.vy = speed / (Math.random() * 10 + 1); // Vertical velocity based on depth
+        this.depth = Math.random() * 10 + 1; // Adjust this range to control the depth range
+        this.context = ctx;
       }
 
-      drawStar() {
-        this.counter -= this.speed;
+      draw() {
+        this.context.beginPath();
+        this.context.arc(this.x, this.y, this.radius / this.depth, 0, Math.PI * 2, false); // Adjust the radius based on depth
+        this.context.closePath();
+        this.context.fillStyle = '#FFF';
+        this.context.fill();
+      }
 
-        if (this.counter < 1) {
-          this.counter = canvasWidth;
-          this.x = getRandomInt(-centerX, centerX);
-          this.y = getRandomInt(-centerY, centerY);
-
-          this.radiusMax = getRandomInt(1, 10);
-          this.speed = getRandomInt(1, 5);
+      update() {
+        this.x += this.vx;
+        this.y += this.vy * this.depth; // Adjust the vertical velocity based on depth
+        // Wrap around the canvas when the star goes off-screen
+        if (this.y > canvasHeight + this.radius) {
+          this.y = -this.radius;
+          this.x = Math.random() * canvasWidth;
+          this.depth = Math.random() * 10 + 1; // Reset the depth when wrapping around
         }
-
-        let xRatio = this.x / this.counter;
-        let yRatio = this.y / this.counter;
-
-        let starX = remap(xRatio, 0, 1, 0, canvasWidth);
-        let starY = remap(yRatio, 0, 1, 0, canvasHeight);
-
-        this.radius = remap(this.counter, 0, canvasWidth, this.radiusMax, 0);
-
-        mainContext.beginPath();
-        mainContext.arc(starX, starY, this.radius, 0, Math.PI * 2, false);
-        mainContext.closePath();
-
-        mainContext.fillStyle = "#FFF";
-        mainContext.fill();
       }
     }
 
@@ -80,40 +60,30 @@ const StarrySky = () => {
       }
     }
 
-    function draw(timestamp) {
-      currentTime = timestamp;
-      deltaTime = currentTime - previousTime;
-
-      if (deltaTime > interval) {
-        previousTime = currentTime - (deltaTime % interval);
-
-        mainContext.clearRect(0, 0, canvasWidth, canvasHeight);
-        mainContext.fillStyle = "#111";
-        mainContext.fillRect(0, 0, canvasWidth, canvasHeight);
-
-        mainContext.translate(centerX, centerY);
-
-        for (let i = 0; i < stars.length; i++) {
-          let star = stars[i];
-          star.drawStar();
-        }
-
-        mainContext.translate(-centerX, -centerY);
+    function draw() {
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+      ctx.fillStyle = '#111';
+      ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+      for (let i = 0; i < stars.length; i++) {
+        let star = stars[i];
+        star.draw();
+        star.update();
       }
-
       requestAnimationFrame(draw);
     }
 
     setup();
     draw();
+
+    return () => {
+      window.removeEventListener('resize', updateCanvasSize);
+    };
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      width={window.innerWidth}
-      height={window.innerHeight}
-    />
+    <div className="starry-sky-container">
+      <canvas ref={canvasRef} />
+    </div>
   );
 };
 
