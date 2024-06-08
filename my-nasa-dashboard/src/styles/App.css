@@ -22,6 +22,7 @@ body, html {
   transform: translate(-50%, -50%);
   width: 50vw;
   height: 50vw;
+  z-index: 2;
 }
 
 .content-area {
