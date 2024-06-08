@@ -5,20 +5,24 @@ import { OrbitControls } from '@react-three/drei';
 import ReactDOM from 'react-dom/client';
 import StarrySky from './components/StarrySky';
 import Scene from './components/Scene';
+import Title from './components/Title';
 import './styles/App.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <div className="app-container">
+    <Title />
+    <div className="astronaut-container">
+          <img src="../public/astronaut.png" alt="Astronaut" className="astronaut-image" />
+    </div>
     <div className="planet-model-container">
-      <Canvas shadows>
+      <Canvas shadows camera= {{ position: [0, 0, 5] }}>
         <Suspense fallback={null}>
           <Scene />
           <OrbitControls 
             minDistance={2} 
-            maxDistance={10} 
+            maxDistance={4} 
           />
           <ambientLight intensity={0.1} />
-          <pointLight position={[10, 10, 10]} intensity={0.5} />
           <directionalLight 
             position={[-5, 5, 5]} 
             intensity={1} 

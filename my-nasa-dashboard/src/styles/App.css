@@ -4,116 +4,8 @@ body, html {
   padding: 0;
   height: 100%;
   overflow: hidden;
-  background-color: #000; /* Ensure the background is black */
+  background-color: #000;
   font-family: 'Roboto Condensed', sans-serif;
-}
-
-.app-container {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-}
-
-
-.planet-model-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 50vw;
-  height: 50vw;
-  z-index: 2;
-}
-
-.content-area {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  padding-top: 120px; /* Add padding instead of margin to prevent overflow */
-}
-
-
-.content-card {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
-  padding: 30px;
-  max-width: 900px;
-  width: 90%;
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-  color: #fff;
-  font-family: 'Roboto Condensed', sans-serif;
-  overflow-y: auto;
-  max-height: 80vh;
-}
-
-.glass-panel {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0.05) 100%
-  );
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-}
-
-.content-card h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  text-align: center;
-  color: #ffd700;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-}
-
-.content-card p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin-top: 20px;
-}
-
-.content-card img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  margin-top: 20px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-}
-
-.title-container {
-  position: absolute;
-  top: 20px;
-  left: 0;
-  right: 0;
-  z-index: 10;
-}
-
-.starry-sky-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-
-.text-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1; /* Ensure the text is on top of the canvas */
-  color: white; /* Set the text color as desired */
-  text-align: center; /* Center the text */
-}
-
-body {
-  background-color: #323F45;
-}
-main {
-  flex-grow: 1;
-  padding: 1rem;
 }
 
 #root {
@@ -124,6 +16,122 @@ main {
   padding: 0;
 }
 
+.app-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.planet-model-container {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50vw;
+  height: 50vw;
+  z-index: 2;
+}
+
+.astronaut-container {
+  position: fixed; /* Change to fixed to escape .planet-model-container's transform */
+  left: 20px; /* Small padding from the left edge */
+  bottom: 20px; /* Small padding from the bottom edge */
+  z-index: 3;
+  width: 200px; /* Set a fixed width for now */
+  height: auto; /* Let the height adjust based on the image's aspect ratio */
+}
+
+.astronaut-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.dialogue-box {
+  position: absolute;
+  top: 10%;
+  left: 100%;
+  transform: translateY(0);
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 15px;
+  max-width: 250px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease-in-out;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dialogue-box::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  transform: translateY(-50%);
+  border-width: 10px 10px 10px 0;
+  border-style: solid;
+  border-color: transparent rgba(255, 255, 255, 0.8) transparent transparent;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.title-container {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  pointer-events: none; /* This allows clicks to pass through to the canvas below */
+}
+
+.app-title {
+  font-family: 'Orbitron', sans-serif; /* A futuristic font, make sure to import it */
+  font-size: 3rem;
+  color: #ffffff;
+  text-shadow: 
+    0 0 10px #00ffff,
+    0 0 20px #00ffff,
+    0 0 30px #00ffff,
+    0 0 40px #00ffff;
+  letter-spacing: 5px;
+  animation: glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 
+      0 0 10px #00ffff,
+      0 0 20px #00ffff,
+      0 0 30px #00ffff,
+      0 0 40px #00ffff;
+  }
+  to {
+    text-shadow: 
+      0 0 20px #00ffff,
+      0 0 30px #00ffff,
+      0 0 40px #00ffff,
+      0 0 50px #00ffff,
+      0 0 60px #00ffff;
+  }
+}
+
+/* Rest of your styles remain the same */
+
+.starry-sky-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
 canvas {
   position: absolute;
   top: 0;
@@ -132,38 +140,6 @@ canvas {
   height: 100%;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
+/* You can remove or comment out styles that are not directly 
+   related to the layout of the main components (app-container, 
+   planet-model-container, astronaut-container, etc.) to reduce confusion */

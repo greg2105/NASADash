@@ -5,7 +5,7 @@ import '../styles/Title.css';
 const Title = () => {
     return (
         <div className="title-container">
-          <h1 className="title">NASA Space Explorer</h1>
+          <h1 className="title">NebulAPI</h1>
         </div>
       );
 };
