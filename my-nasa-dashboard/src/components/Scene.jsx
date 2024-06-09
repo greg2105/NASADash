@@ -1,23 +1,24 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { useGLTF, Html } from '@react-three/drei';
+import { useGLTF } from '@react-three/drei';
 import { useThree, useFrame } from '@react-three/fiber';
-import { MeshStandardMaterial, BackSide, Mesh, CylinderGeometry, MeshBasicMaterial, Quaternion, Matrix4 } from 'three';
+import { MeshStandardMaterial, BackSide, Quaternion, Matrix4 } from 'three';
 import styled from 'styled-components';
 import HotSpot from './HotSpot';
 import FloatingCircle from './FloatingCircle';
 import { Vector3, Euler } from 'three';
+import TextWindow from './TextWindow';
 
 const StyledText = styled.div`
   color: #00ffff; /* Light cyan */
 `;
 
-
 const Scene = () => {
   const { nodes, materials } = useGLTF('/scene.gltf');
   const { camera, size } = useThree();
   const groupRef = useRef();
-  const ringRotation = new Euler(Math.PI / 4, Math.PI / 2, 0); // Adjust the rotation values as needed
-  const earthRadius = nodes.Object_4.geometry.boundingSphere.radius;
+
+  const [textWindowContent, setTextWindowContent] = useState('');
+  const [showTextWindow, setShowTextWindow] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -124,11 +125,19 @@ const Scene = () => {
           const newColors = [...circleColors]; // Create a copy of the array
           newColors[index] = "purple"; // #513c5f
           setCircleColors(newColors); //
+          setTextWindowContent(`You clicked on hotspot ${index + 1}`); // Update the text window content
+          setShowTextWindow(true); // Show the text window
           }}>
           </HotSpot>
           </React.Fragment>
         );
       })}
+      {showTextWindow && (
+      <TextWindow
+        content={textWindowContent}
+        position={[0, 0, 2]} // Adjust the position as needed
+      />
+    )}
     </group>
   );
 };
