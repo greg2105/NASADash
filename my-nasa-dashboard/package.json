@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "vite",
     "server": "node server.js",
-    "start": "concurrently \"npm run server\" \"npm run dev\"",
-    "build": "vite build",
+    "start": "yarn run vite",
+    "build": "yarn run vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
