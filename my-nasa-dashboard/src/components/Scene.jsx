@@ -1,7 +1,14 @@
 import React, { useRef, useEffect } from 'react';
-import { useGLTF } from '@react-three/drei';
+import { useGLTF, Html } from '@react-three/drei';
 import { useThree, useFrame } from '@react-three/fiber';
-import { MeshStandardMaterial, BackSide } from 'three';
+import { MeshStandardMaterial, BackSide, Mesh, CylinderGeometry, MeshBasicMaterial } from 'three';
+import styled from 'styled-components';
+import HotSpot from './HotSpot';
+
+const StyledText = styled.div`
+  color: #00ffff; /* Light cyan */
+`;
+
 
 const Scene = () => {
   const { nodes, materials } = useGLTF('/scene.gltf');
@@ -27,30 +34,20 @@ const Scene = () => {
   const earthMaterial = new MeshStandardMaterial({
     map: materials['Scene_-_Root'].map,
     normalMap: materials['Scene_-_Root'].normalMap,
-    roughness: 0.8,
-    metalness: 0.1,
-    wireframe: false,  // Ensure wireframe is off
+    roughness: 0.5,
+    metalness: 0.2,
+    wireframe: false, // Ensure wireframe is off
   });
 
   return (
     <group ref={groupRef}>
-      <directionalLight 
-        position={[-5, 5, 5]} 
-        intensity={1.5} 
-        color="white" 
-        castShadow 
-      />
-      <mesh 
-        geometry={nodes.Object_4.geometry} 
-        material={earthMaterial}
-        scale={1.128}
-        castShadow
-        receiveShadow
-      />
+      <mesh geometry={nodes.Object_4.geometry} material={earthMaterial} scale={1.128} castShadow receiveShadow />
       {/* Add a backside mesh to simulate atmosphere */}
       <mesh geometry={nodes.Object_4.geometry} scale={1.132}>
         <meshBasicMaterial color="#90a3ff" transparent opacity={0.2} side={BackSide} />
       </mesh>
+      <HotSpot position={[1, 0.5, 0]} onClick={() => console.log('Hotspot 1 clicked')}>
+      </HotSpot>
     </group>
   );
 };

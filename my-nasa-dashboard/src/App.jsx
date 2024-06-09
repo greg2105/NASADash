@@ -35,8 +35,8 @@ const App = () => {
             <Suspense fallback={null}>
               <Scene />
               <OrbitControls minDistance={2} maxDistance={4} />
-              <ambientLight intensity={0.1} />
-              <directionalLight position={[-5, 5, 5]} intensity={1} color="white" castShadow />
+              <ambientLight intensity={0.4} color="purple" />
+              <directionalLight position={[5, 5, -5]} intensity={2} color="pink" castShadow />
             </Suspense>
           </Canvas>
         </div>

@@ -9,7 +9,7 @@ const StarBackground = (props) => {
   const sphereRadius = Math.max(size.width, size.height) / 2;
 
   const [sphere] = useState(() => {
-    return random.inSphere(new Float32Array(4000), { radius: (sphereRadius / 40)});
+    return random.inSphere(new Float32Array(4000), { radius: (sphereRadius / 30)});
   });
 
   const vertices = useMemo(() => sphere, [sphere]);
@@ -25,7 +25,7 @@ const StarBackground = (props) => {
         <PointMaterial
           transparent
           color="#fff"
-          size={0.01}
+          size={0.03}
           sizeAttenuation
           depthWrite={false}
         />
