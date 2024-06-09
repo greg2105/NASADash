@@ -84,20 +84,33 @@ const Scene = () => {
         <meshBasicMaterial color="#90a3ff" transparent opacity={0.2} side={BackSide} />
       </mesh>
       {ringData.map((ring, index) => {
-        const position = latLongToPoint(ring.latitude, ring.longitude, 1.13);
-        const rotation = calculateTangentialRotation(position);
+        const largeRingPosition = latLongToPoint(ring.latitude, ring.longitude, 1.13);
+        const smallRingPosition = latLongToPoint(ring.latitude, ring.longitude, 1.17);
+        const rotation = calculateTangentialRotation(largeRingPosition);
+
         return (
-          <FloatingCircle
-            key={index}
-            position={position}
-            radius={0.05}
-            color="white"
-            rotation={rotation}
-          />
+          <React.Fragment key={index}>
+            <FloatingCircle
+              position={largeRingPosition}
+              radius={0.04}
+              color="white"
+              rotation={rotation}
+              pulseSpeed={2}
+            />
+            <FloatingCircle
+              position={smallRingPosition}
+              radius={0.01}
+              color="white"
+              rotation={rotation}
+              pulseSpeed={2}
+            />
+            <HotSpot 
+            position={smallRingPosition} 
+            onClick={() => console.log(`Hotspot ${index + 1} clicked: ${ring.label}`)}>
+            </HotSpot>
+          </React.Fragment>
         );
       })}
-      <HotSpot position={[1, 0.5, 0]} onClick={() => console.log('Hotspot 1 clicked')}>
-      </HotSpot>
     </group>
   );
 };

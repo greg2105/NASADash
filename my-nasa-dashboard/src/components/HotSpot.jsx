@@ -12,8 +12,8 @@ const StyledText = styled.div`
 const HotSpot = ({ position, onClick, children }) => {
   return (
     <mesh position={position} onClick={onClick}>
-      <sphereGeometry args={[0.1, 32, 32]} /> {/* Adjust size and resolution as needed */}
-      <meshBasicMaterial color="#00ffff" transparent opacity={0.5} /> {/* Adjust color and opacity as needed */}
+      <sphereGeometry args={[0.05, 16, 16]} /> {/* Adjust size and resolution as needed */}
+      <meshBasicMaterial color="#00ffff" transparent opacity={0.0} /> {/* Adjust color and opacity as needed */}
       <Html center distanceFactor={10}>
         <StyledText>{children}</StyledText>
       </Html>
