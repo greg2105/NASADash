@@ -28,7 +28,7 @@ const App = () => {
       </Canvas>
       <div className="content-container">
         <div className="astronaut-container">
-          <img src="../public/astronaut.png" alt="Astronaut" className="astronaut-image" />
+          <img src="../../public/astronaut.png" alt="Astronaut" className="astronaut-image" />
         </div>
         <div className="planet-model-container" onClick={handlePlanetClick}>
           <Canvas shadows camera={{ position: [0, 0, 5] }}>

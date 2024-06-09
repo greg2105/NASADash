@@ -19,6 +19,7 @@ const Scene = () => {
 
   const [textWindowContent, setTextWindowContent] = useState('');
   const [showTextWindow, setShowTextWindow] = useState(false);
+  const [selectedHotspotIndex, setSelectedHotspotIndex] = useState(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -126,6 +127,7 @@ const Scene = () => {
           newColors[index] = "purple"; // #513c5f
           setCircleColors(newColors); //
           setTextWindowContent(`You clicked on hotspot ${index + 1}`); // Update the text window content
+          setSelectedHotspotIndex(index);
           setShowTextWindow(true); // Show the text window
           }}>
           </HotSpot>
@@ -135,7 +137,8 @@ const Scene = () => {
       {showTextWindow && (
       <TextWindow
         content={textWindowContent}
-        position={[0, 0, 2]} // Adjust the position as needed
+        latitude={ringData[selectedHotspotIndex].latitude}
+        longitude={ringData[selectedHotspotIndex].longitude}
       />
     )}
     </group>

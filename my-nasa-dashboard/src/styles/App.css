@@ -35,29 +35,28 @@ body, html {
 
 .speech-bubble {
   position: relative;
-  background: #6d6b7f;  /* Semi-transparent blue */
+  background: rgba(109, 107, 127, 0.7); /* Semi-transparent blue with 70% opacity */
   border-radius: 15px;
   padding: 15px;
-  font-family: FreeMono, monospace;  /* Monospace font for a tech feel */
+  font-family: FreeMono, monospace;
   font-size: 0.9rem;
-  color: #e0e0e0;  /* Light gray text */
-  box-shadow: 0 4px 15px rgba(0, 128, 255, 0.3);  /* Blue glow */
-  border: 2px solid #513c5f;  /* Neon cyan border */
+  color: rgba(224, 224, 224, 0.8); /* Light gray text with 80% opacity */
+  box-shadow: 0 4px 15px rgba(0, 128, 255, 0.3); /* Blue glow with 30% opacity */
+  border: 2px solid rgba(81, 60, 95, 0.8); /* Neon cyan border with 80% opacity */
 }
 
 .speech-bubble::after {
   content: '';
   position: absolute;
-  top: 30%; /* Start at the vertical middle */
-  left: 5px; /* Move the tail to the left side */
+  top: 30%;
+  left: 5px;
   width: 0;
   height: 0;
   border: 15px solid transparent;
-  border-right-color: #513c5f; /* Color the right border */
-  border-left: none; /* Remove left border */
-  margin-top: -15px; /* Center vertically */
+  border-right-color: rgba(81, 60, 95, 0.8); /* Neon cyan border color with 80% opacity */
+  border-left: none;
+  margin-top: -15px;
 }
-
 .cursor {
   animation: blink 1s infinite;
   color: #6d6b7f;  /* Neon cyan cursor */
@@ -84,8 +83,8 @@ body, html {
 
 .planet-model-container {
   flex: 0 0 50vmin;
-  width: 50vmin;
-  height: 50vmin;
+  width: 60vmin;
+  height: 80vh;
 }
 
 .astronaut-container {
