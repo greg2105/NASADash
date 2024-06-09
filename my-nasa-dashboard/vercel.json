@@ -1,7 +1,14 @@
 {
     "build": {
       "env": {
-        "YARN_VERSION": "1.22.22"
+        "YARN_VERSION": "1.22.22"  
       }
-    }
+    },
+    "builds": [
+      {
+        "src": "package.json",
+        "use": "@vercel/node",
+        "config": { "build": { "command": "yarn build" } } 
+      }
+    ]
   }
