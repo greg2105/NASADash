@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useGLTF, Html } from '@react-three/drei';
 import { useThree, useFrame } from '@react-three/fiber';
 import { MeshStandardMaterial, BackSide, Mesh, CylinderGeometry, MeshBasicMaterial, Quaternion, Matrix4 } from 'three';
@@ -35,11 +35,24 @@ const Scene = () => {
   });
 
   const ringData = [
-    { latitude: 30, longitude: 0 },
-    { latitude: 45, longitude: 90 },
-    { latitude: -15, longitude: -120 },
+    { latitude: 30, longitude: 0, label: '1' },
+    { latitude: 45, longitude: 90, label: '2' },
+    { latitude: 30, longitude: -100, label: '3' },
+    { latitude: 40, longitude: -80, label: '4' },
+    { latitude: 37, longitude: -115, label: '5' },
+    { latitude: -15, longitude: -70, label: '6' },
+    { latitude: 50, longitude: 10, label: '7' },
+    { latitude: 45, longitude: 40, label: '8' },
+    { latitude: 20, longitude: 15, label: '9' },
+    { latitude: 25, longitude: 80, label: '10' },
+    { latitude: 30, longitude: 100, label: '11' },
+    { latitude: -5, longitude: -60, label: '12' },
+    { latitude: -7, longitude: -45, label: '13' },
+    { latitude: 25, longitude: 50, label: '14' },
     // Add more ring data here
   ];
+
+  const [circleColors, setCircleColors] = useState(Array(ringData.length).fill("white"));
 
   // Function to convert latitude and longitude to a point on the sphere
   const latLongToPoint = (latitude, longitude, radius) => {
@@ -93,21 +106,26 @@ const Scene = () => {
             <FloatingCircle
               position={largeRingPosition}
               radius={0.04}
-              color="white"
+              color={circleColors[index]} // Use the dynamic circleColor state
               rotation={rotation}
               pulseSpeed={2}
             />
             <FloatingCircle
               position={smallRingPosition}
               radius={0.01}
-              color="white"
+              color={circleColors[index]} // Use the dynamic circleColor state
               rotation={rotation}
               pulseSpeed={2}
             />
             <HotSpot 
-            position={smallRingPosition} 
-            onClick={() => console.log(`Hotspot ${index + 1} clicked: ${ring.label}`)}>
-            </HotSpot>
+          position={smallRingPosition} 
+          onClick={() => {
+          console.log(`Hotspot ${index + 1} clicked: ${ring.label}`);
+          const newColors = [...circleColors]; // Create a copy of the array
+          newColors[index] = "purple"; // #513c5f
+          setCircleColors(newColors); //
+          }}>
+          </HotSpot>
           </React.Fragment>
         );
       })}
