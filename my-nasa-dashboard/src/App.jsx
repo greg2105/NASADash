@@ -14,6 +14,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <div className="astronaut-container">
           <img src="../public/astronaut.png" alt="Astronaut" className="astronaut-image" />
     </div>
+    <div className="starry-sky-container">
+    <Canvas >  
+      <StarrySky />
+    </Canvas>
+    </div>
     <div className="planet-model-container">
       <Canvas shadows camera= {{ position: [0, 0, 5] }}>
         <Suspense fallback={null}>
@@ -32,6 +37,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </Suspense>
       </Canvas>
     </div>
-    <StarrySky />
   </div>
 );
