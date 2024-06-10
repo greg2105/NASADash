@@ -23,6 +23,18 @@ body, html {
   overflow: hidden;
 }
 
+.dashboard-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30%;
+  height: 100%;
+  background-color: rgba(17, 16, 16, 0.8); /* Semi-transparent background color */
+  padding: 20px; /* Add some padding */
+  color: #fff; /* Set the text color */
+  overflow: auto; /* Add scrollbar if the dashboard content exceeds the height */
+}
+
 .speech-bubble-container {
   position: fixed;
   bottom: 40px;

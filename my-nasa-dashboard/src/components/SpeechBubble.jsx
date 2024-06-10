@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/SpeechBubble.css';
 
-const SpeechBubble = ({ text, speed = 60, onFinishTyping }) => {
+const SpeechBubble = ({ text, speed = 120, onFinishTyping }) => {
   const [displayText, setDisplayText] = useState('');
   const [isTypingComplete, setIsTypingComplete] = useState(false);
 

@@ -6,19 +6,16 @@ import styled from 'styled-components';
 import HotSpot from './HotSpot';
 import FloatingCircle from './FloatingCircle';
 import { Vector3, Euler } from 'three';
-import TextWindow from './TextWindow';
 
 const StyledText = styled.div`
   color: #00ffff; /* Light cyan */
 `;
 
-const Scene = () => {
+const Scene = ({onHotspotClicked}) => {
   const { nodes, materials } = useGLTF('/scene.gltf');
   const { camera, size } = useThree();
   const groupRef = useRef();
 
-  const [textWindowContent, setTextWindowContent] = useState('');
-  const [showTextWindow, setShowTextWindow] = useState(false);
   const [selectedHotspotIndex, setSelectedHotspotIndex] = useState(null);
   const [targetRotation, setTargetRotation] = useState(new Euler());
   const [currentRotation, setCurrentRotation] = useState(new Euler());
@@ -64,6 +61,10 @@ const Scene = () => {
   ];
 
   const [circleColors, setCircleColors] = useState(Array(ringData.length).fill("white"));
+
+  const handleHotspotClick = (index) => {
+    handleHotspotClicked(index); // Call the onHotspotClicked prop function with the clicked index
+  };
 
   const calculateTargetRotation = (latitude, longitude) => {
     const phi = (90 - latitude) * (Math.PI / 180);
@@ -117,13 +118,6 @@ const Scene = () => {
     return euler;
   };
 
-  const getTextWindowRotation = (index) => {
-    const ring = ringData[index];
-    const ringPosition = latLongToPoint(ring.latitude, ring.longitude, 1.17);
-    const ringRotation = calculateTangentialRotation(ringPosition);
-    return new Euler(ringRotation.x, ringRotation.y, 0);
-  };
-
   // Override the material to ensure it's set up correctly
   const earthMaterial = new MeshStandardMaterial({
     map: materials['Scene_-_Root'].map,
@@ -167,28 +161,15 @@ const Scene = () => {
           const newColors = [...circleColors]; // Create a copy of the array
           newColors[index] = "purple"; // #513c5f
           setCircleColors(newColors); //
-          setTextWindowContent(`You clicked on hotspot ${index + 1}`); // Update the text window content
           setSelectedHotspotIndex(index);
-          setShowTextWindow(true); // Show the text window
-
           const newTargetRotation = calculateTargetRotation(ring.latitude, ring.longitude);
           setTargetRotation(newTargetRotation);
+          onHotspotClicked(index);
           }}>
           </HotSpot>
           </React.Fragment>
         );
       })}
-      
-      {showTextWindow && (
-  <TextWindow
-    content={textWindowContent}
-    latitude={ringData[selectedHotspotIndex].latitude}
-    longitude={ringData[selectedHotspotIndex].longitude}
-    rotation={getTextWindowRotation(selectedHotspotIndex)}
-    camera={camera}
-  />
-)}
-
     </group>
   );
 };
