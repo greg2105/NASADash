@@ -20,6 +20,8 @@ const Scene = () => {
   const [textWindowContent, setTextWindowContent] = useState('');
   const [showTextWindow, setShowTextWindow] = useState(false);
   const [selectedHotspotIndex, setSelectedHotspotIndex] = useState(null);
+  const [targetRotation, setTargetRotation] = useState(new Euler());
+  const [currentRotation, setCurrentRotation] = useState(new Euler());
 
   useEffect(() => {
     const handleResize = () => {
@@ -32,7 +34,14 @@ const Scene = () => {
 
   useFrame((state, delta) => {
     if (groupRef.current) {
-      groupRef.current.rotation.y += 0.0005;
+      // Interpolate the rotation
+      const step = 0.05; // Adjust for smoother or faster rotation
+      groupRef.current.rotation.x += (targetRotation.x - groupRef.current.rotation.x) * step;
+      groupRef.current.rotation.y += (targetRotation.y - groupRef.current.rotation.y) * step;
+      groupRef.current.rotation.z += (targetRotation.z - groupRef.current.rotation.z) * step;
+  
+      // Update current rotation state (if needed)
+      setCurrentRotation(new Euler(groupRef.current.rotation.x, groupRef.current.rotation.y, groupRef.current.rotation.z));
     }
   });
 
@@ -56,6 +65,30 @@ const Scene = () => {
 
   const [circleColors, setCircleColors] = useState(Array(ringData.length).fill("white"));
 
+  const calculateTargetRotation = (latitude, longitude) => {
+    const phi = (90 - latitude) * (Math.PI / 180);
+    const theta = (longitude + 180) * (Math.PI / 180);
+  
+    // Calculate the point on the sphere (hotspot position)
+    const x = -Math.sin(phi) * Math.cos(theta);
+    const y = Math.cos(phi);
+    const z = Math.sin(phi) * Math.sin(theta);
+  
+    // Create a vector pointing from the center to the hotspot
+    const hotspotVector = new Vector3(x, y, z);
+  
+    // Use the camera's position vector directly (no need to negate)
+    const targetVector = camera.position.clone().normalize().negate();
+  
+    // Calculate the rotation needed to align -hotspotVector with targetVector
+    const quaternion = new Quaternion();
+    quaternion.setFromUnitVectors(hotspotVector.clone().negate(), targetVector);
+  
+    // Convert quaternion to Euler angles
+    const euler = new Euler().setFromQuaternion(quaternion);
+  
+    return euler;
+  };
   // Function to convert latitude and longitude to a point on the sphere
   const latLongToPoint = (latitude, longitude, radius) => {
     const phi = (90 - latitude) * (Math.PI / 180);
@@ -72,14 +105,23 @@ const Scene = () => {
     const normal = position.clone().normalize();
     const tangent = new Vector3(-normal.y, normal.x, 0).normalize();
     const binormal = new Vector3().crossVectors(normal, tangent);
-
+  
     const rotationMatrix = new Matrix4();
     rotationMatrix.makeBasis(tangent, binormal, normal);
-
+  
     const quaternion = new Quaternion();
     quaternion.setFromRotationMatrix(rotationMatrix);
+  
+    const euler = new Euler().setFromQuaternion(quaternion);
+  
+    return euler;
+  };
 
-    return new Euler().setFromQuaternion(quaternion);
+  const getTextWindowRotation = (index) => {
+    const ring = ringData[index];
+    const ringPosition = latLongToPoint(ring.latitude, ring.longitude, 1.17);
+    const ringRotation = calculateTangentialRotation(ringPosition);
+    return new Euler(ringRotation.x, ringRotation.y, 0);
   };
 
   // Override the material to ensure it's set up correctly
@@ -102,7 +144,6 @@ const Scene = () => {
         const largeRingPosition = latLongToPoint(ring.latitude, ring.longitude, 1.13);
         const smallRingPosition = latLongToPoint(ring.latitude, ring.longitude, 1.17);
         const rotation = calculateTangentialRotation(largeRingPosition);
-
         return (
           <React.Fragment key={index}>
             <FloatingCircle
@@ -129,21 +170,28 @@ const Scene = () => {
           setTextWindowContent(`You clicked on hotspot ${index + 1}`); // Update the text window content
           setSelectedHotspotIndex(index);
           setShowTextWindow(true); // Show the text window
+
+          const newTargetRotation = calculateTargetRotation(ring.latitude, ring.longitude);
+          setTargetRotation(newTargetRotation);
           }}>
           </HotSpot>
           </React.Fragment>
         );
       })}
+      
       {showTextWindow && (
-      <TextWindow
-        content={textWindowContent}
-        latitude={ringData[selectedHotspotIndex].latitude}
-        longitude={ringData[selectedHotspotIndex].longitude}
-      />
-    )}
+  <TextWindow
+    content={textWindowContent}
+    latitude={ringData[selectedHotspotIndex].latitude}
+    longitude={ringData[selectedHotspotIndex].longitude}
+    rotation={getTextWindowRotation(selectedHotspotIndex)}
+    camera={camera}
+  />
+)}
+
     </group>
   );
 };
 
 useGLTF.preload('/scene.gltf');
-export default Scene;
+export default Scene; 

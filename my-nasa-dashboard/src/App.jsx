@@ -34,7 +34,7 @@ const App = () => {
           <Canvas shadows camera={{ position: [0, 0, 5] }}>
             <Suspense fallback={null}>
               <Scene />
-              <OrbitControls minDistance={2} maxDistance={4} />
+              <OrbitControls minDistance={2} maxDistance={4} enablePan={false}/>
               <ambientLight intensity={0.4} color="purple" />
               <directionalLight position={[5, 5, -5]} intensity={2} color="pink" castShadow />
             </Suspense>
