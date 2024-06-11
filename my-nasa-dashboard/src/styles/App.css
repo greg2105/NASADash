@@ -23,6 +23,98 @@ body, html {
   overflow: hidden;
 }
 
+/* APOD */
+.apod-container h3 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  text-align: center;
+  overflow: auto;
+}
+
+.apod-image-container {
+  max-width: 100%;
+  max-height: 500px;
+  overflow: hidden;
+  margin: 20px 0;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.apod-image {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.apod-container p {
+  max-height: 700px; /* Adjust this value to your desired maximum height */
+  overflow-y: auto; /* This will add a scrollbar when the text exceeds the max-height */
+  z-index: 9999;
+}
+
+.apod-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 8px;
+}
+
+/* DONKI */
+.donki-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 8px;
+}
+
+.donki-container h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.date-input-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.date-input-container label {
+  margin-right: 10px;
+}
+
+.date-input-container input {
+  margin-right: 20px;
+  padding: 5px;
+  border-radius: 4px;
+  border: none;
+}
+
+.donki-data-container {
+  max-width: 100%;
+  max-height: 500px;
+  overflow: auto;
+  margin: 20px 0;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.donki-data-container pre {
+  white-space: pre-wrap;
+  word-break: break-all;
+  font-family: monospace;
+  font-size: 0.9rem;
+}
+
 .dashboard-container {
   position: absolute;
   top: 0;
@@ -32,7 +124,6 @@ body, html {
   background-color: rgba(17, 16, 16, 0.8); /* Semi-transparent background color */
   padding: 20px; /* Add some padding */
   color: #fff; /* Set the text color */
-  overflow: auto; /* Add scrollbar if the dashboard content exceeds the height */
 }
 
 .speech-bubble-container {

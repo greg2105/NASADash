@@ -19,13 +19,15 @@ const ApodSection = () => {
   }, []);
 
   return (
-    <div>
+    <div className="apod-container">
       {apodData ? (
-        <div>
-          <h2>{apodData.title}</h2>
-          <img src={apodData.url} alt={apodData.title} />
+        <>
+          <h3>{apodData.title}</h3>
+          <div className="apod-image-container">
+            <img src={apodData.url} alt={apodData.title} className="apod-image" />
+          </div>
           <p>{apodData.explanation}</p>
-        </div>
+        </>
       ) : (
         <p>Loading...</p>
       )}

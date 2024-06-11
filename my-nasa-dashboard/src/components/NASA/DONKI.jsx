@@ -19,7 +19,6 @@ const DonkiSection = () => {
         console.error('Error fetching DONKI data:', error);
       }
     };
-
     fetchData();
   }, [startDate, endDate]);
 
@@ -32,8 +31,9 @@ const DonkiSection = () => {
   };
 
   return (
-    <div>
-      <div>
+    <div className="donki-container">
+      <h2>Coronal Mass Ejection (CME) Data</h2>
+      <div className="date-input-container">
         <label htmlFor="startDate">Start Date:</label>
         <input
           type="date"
@@ -50,8 +50,7 @@ const DonkiSection = () => {
         />
       </div>
       {donkiData ? (
-        <div>
-          <h2>Coronal Mass Ejection (CME) Data</h2>
+        <div className="donki-data-container">
           <pre>{JSON.stringify(donkiData, null, 2)}</pre>
         </div>
       ) : (
