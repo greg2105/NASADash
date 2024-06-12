@@ -21,7 +21,7 @@ import TechTransferSection from './components/NASA/TechT';
 import TLESection from './components/NASA/TLE';
 import WMTSSection from './components/NASA/WMTS';
 import CloseApproachSection from './components/NASA/SSDCNEOS';
-import astronautImage from '../public/astronaut.png'
+import astronautImage from './astronaut.png'
 
 const Dashboard = ({ data }) => {
   // Render the dashboard content based on the data received from the hotspot click
