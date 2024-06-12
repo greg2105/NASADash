@@ -21,6 +21,7 @@ import TechTransferSection from './components/NASA/TechT';
 import TLESection from './components/NASA/TLE';
 import WMTSSection from './components/NASA/WMTS';
 import CloseApproachSection from './components/NASA/SSDCNEOS';
+import astronautImage from '../public/astronaut.png'
 
 const Dashboard = ({ data }) => {
   // Render the dashboard content based on the data received from the hotspot click
@@ -133,7 +134,7 @@ const App = () => {
       </Canvas>
       <div className="content-container">
         <div className="astronaut-container">
-          <img src="../../public/astronaut.png" alt="Astronaut" className="astronaut-image" />
+          <img src={astronautImage} alt="Astronaut" className="astronaut-image" />
         </div>
         <div className="planet-model-container">
           <Canvas shadows camera={{ position: [0, 0, 5] }}>
