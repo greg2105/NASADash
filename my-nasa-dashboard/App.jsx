@@ -2,25 +2,25 @@ import React, { Suspense, useState, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import ReactDOM from 'react-dom/client';
-import StarrySky from './components/StarrySky';
-import Scene from './components/Scene';
-import Title from './components/Title';
-import SpeechBubble from './components/SpeechBubble';
-import './styles/App.css';
-import ApodSection from './components/NASA/APOD';
-import DonkiSection from './components/NASA/DONKI';
-import NearEarthObjects from './components/NASA/NeoWs';
-import Earth from './components/NASA/Earth';
-import EONET from './components/NASA/EONET';
-import EPIC from './components/NASA/EPIC';
-import Exoplanet from './components/NASA/Exoplanet';
-import ImageRepositorySection from './components/NASA/IVL';
-import RoverPhotosSection from './components/NASA/MRP';
-import SatelliteSituationCenterSection from './components/NASA/SSC';
-import TechTransferSection from './components/NASA/TechT';
-import TLESection from './components/NASA/TLE';
-import WMTSSection from './components/NASA/WMTS';
-import CloseApproachSection from './components/NASA/SSDCNEOS';
+import StarrySky from './src/components/StarrySky';
+import Scene from './src/components/Scene';
+import Title from './src/components/Title';
+import SpeechBubble from './src/components/SpeechBubble';
+import './src/styles/App.css';
+import ApodSection from './src/components/NASA/APOD';
+import DonkiSection from './src/components/NASA/DONKI';
+import NearEarthObjects from './src/components/NASA/NeoWs';
+import Earth from './src/components/NASA/Earth';
+import EONET from './src/components/NASA/EONET';
+import EPIC from './src/components/NASA/EPIC';
+import Exoplanet from './src/components/NASA/Exoplanet';
+import ImageRepositorySection from './src/components/NASA/IVL';
+import RoverPhotosSection from './src/components/NASA/MRP';
+import SatelliteSituationCenterSection from './src/components/NASA/SSC';
+import TechTransferSection from './src/components/NASA/TechT';
+import TLESection from './src/components/NASA/TLE';
+import WMTSSection from './src/components/NASA/WMTS';
+import CloseApproachSection from './src/components/NASA/SSDCNEOS';
 
 const Dashboard = ({ data }) => {
   // Render the dashboard content based on the data received from the hotspot click
@@ -133,7 +133,7 @@ const App = () => {
       </Canvas>
       <div className="content-container">
         <div className="astronaut-container">
-          <img src="/assets/astronaut.png" alt="Astronaut" className="astronaut-image" />
+          {/* <img src="/assets/astronaut.png" alt="Astronaut" className="astronaut-image" /> */}
         </div>
         <div className="planet-model-container">
           <Canvas shadows camera={{ position: [0, 0, 5] }}>
