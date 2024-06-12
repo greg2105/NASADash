@@ -544,7 +544,7 @@ body, html {
   right: 0;
   width: 30%;
   height: 100%;
-  background-color: rgb(29, 0, 97, 0); /* Semi-transparent background color */
+  background-color: rgba(116, 116, 116, 0.062); /* Semi-transparent background color */
   padding: 20px; /* Add some padding */
   color: #fff; /* Set the text color */
   z-index: 999;
@@ -562,7 +562,7 @@ body, html {
 
 .speech-bubble {
   position: relative;
-  background: rgba(109, 107, 127, 0.7); /* Semi-transparent blue with 70% opacity */
+  background: rgba(109, 107, 127, 0.3); /* Semi-transparent blue with 70% opacity */
   border-radius: 15px;
   padding: 15px;
   font-family: FreeMono, monospace;
