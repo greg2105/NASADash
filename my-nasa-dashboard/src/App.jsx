@@ -133,7 +133,7 @@ const App = () => {
       </Canvas>
       <div className="content-container">
         <div className="astronaut-container">
-          <img src="/images/astronaut.png" alt="Astronaut" className="astronaut-image" />
+          <img src="/assets/astronaut.png" alt="Astronaut" className="astronaut-image" />
         </div>
         <div className="planet-model-container">
           <Canvas shadows camera={{ position: [0, 0, 5] }}>
