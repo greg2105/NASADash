@@ -1,4 +1,3 @@
-// RoverPhotosSection.jsx
 import React, { useState, useEffect } from 'react';
 import { fetchRoverPhotos } from '../../services/MRPService';
 
@@ -24,12 +23,12 @@ const RoverPhotosSection = () => {
   }, []);
 
   return (
-    <div>
+    <div className="rover-photos-container">
+      <h2>Mars Rover Photos</h2>
       {roverPhotos ? (
-        <div>
-          <h2>Mars Rover Photos</h2>
+        <div className="photo-container">
           {roverPhotos.map((photo, index) => (
-            <div key={index}>
+            <div key={index} className="photo-item">
               <img src={photo.img_src} alt={`Rover Photo ${index}`} />
               <p>Camera: {photo.camera.full_name}</p>
               <p>Rover: {photo.rover.name}</p>

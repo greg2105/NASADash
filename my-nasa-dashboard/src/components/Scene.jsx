@@ -52,11 +52,6 @@ const Scene = ({onHotspotClicked}) => {
     { latitude: 50, longitude: 10, label: '7' },
     { latitude: 45, longitude: 40, label: '8' },
     { latitude: 20, longitude: 15, label: '9' },
-    { latitude: 25, longitude: 80, label: '10' },
-    { latitude: 30, longitude: 100, label: '11' },
-    { latitude: -5, longitude: -60, label: '12' },
-    { latitude: -7, longitude: -45, label: '13' },
-    { latitude: 25, longitude: 50, label: '14' },
     // Add more ring data here
   ];
 

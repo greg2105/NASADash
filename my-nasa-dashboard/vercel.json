@@ -1,14 +1,11 @@
 {
-    "build": {
-      "env": {
-        "YARN_VERSION": "1.22.22"  
+  "builds": [
+    {
+      "src": "/src/main.jsx",
+      "use": "@vercel/static-build",
+      "config": {
+        "outDirectory": "dist"
       }
-    },
-    "builds": [
-      {
-        "src": "package.json",
-        "use": "@vercel/node",
-        "config": { "build": { "command": "yarn build" } } 
-      }
-    ]
-  }
+    }
+  ]
+}

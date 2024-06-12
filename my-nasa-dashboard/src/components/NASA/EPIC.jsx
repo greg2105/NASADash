@@ -11,7 +11,6 @@ const EPIC = () => {
       try {
         const data = await fetchEPICData('natural', date);
         setEpicData(data);
-
         const metadata = await fetchImageMetadata(date);
         setImageMetadata(metadata);
       } catch (error) {
@@ -22,20 +21,21 @@ const EPIC = () => {
   }, [date]);
 
   return (
-    <div>
+    <div className="epic-container">
       <h2>EPIC Data</h2>
-      <label>
-        Date (YYYY-MM-DD):
+      <div className="date-input-container">
+        <label htmlFor="date">Date (YYYY-MM-DD):</label>
         <input
           type="text"
+          id="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
         />
-      </label>
+      </div>
       {imageMetadata.length > 0 ? (
-        <ul>
+        <ul className="image-list">
           {imageMetadata.map((image) => (
-            <li key={image.image}>
+            <li key={image.image} className="image-item">
               <h3>{image.caption}</h3>
               <p>Image Date: {image.date}</p>
               <p>Spacecraft: {image.spacecraft}</p>
@@ -44,7 +44,7 @@ const EPIC = () => {
           ))}
         </ul>
       ) : (
-        <p>No images found.</p>
+        <p>Loading...</p>
       )}
     </div>
   );

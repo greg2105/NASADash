@@ -17,12 +17,12 @@ const EONET = () => {
   }, []);
 
   return (
-    <div>
+    <div className="eonet-container">
       <h2>EONET Events</h2>
       {eonetData ? (
-        <div>
+        <div className="event-container">
           {eonetData.events.map((event) => (
-            <div key={event.id}>
+            <div key={event.id} className="event-item">
               <h3>{event.title}</h3>
               <p>Category: {event.categories.join(', ')}</p>
               {event.geometry && event.geometry.length > 0 && (

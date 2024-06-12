@@ -11,7 +11,6 @@ const ImageRepositorySection = () => {
         const searchQuery = 'moon';
         const searchData = await searchImages(searchQuery);
         setSearchResults(searchData.collection.items);
-
         if (searchData.collection.items.length > 0) {
           const { links, data } = searchData.collection.items[0];
           setAssetManifest({
@@ -30,18 +29,20 @@ const ImageRepositorySection = () => {
   }, []);
 
   return (
-    <div>
+    <div className="image-repository-container">
       {assetManifest && assetManifest.data ? (
         <div>
           <h2>{assetManifest.data[0].title}</h2>
           <p>{assetManifest.data[0].description}</p>
-          {assetManifest.links.map((link, index) => (
-            <div key={index}>
-              <a href={link.href} target="_blank" rel="noopener noreferrer">
-                {link.rel}
-              </a>
-            </div>
-          ))}
+          <div className="asset-link-container">
+            {assetManifest.links.map((link, index) => (
+              <div key={index} className="asset-link-item">
+                <a href={link.href} target="_blank" rel="noopener noreferrer">
+                  {link.rel}
+                </a>
+              </div>
+            ))}
+          </div>
         </div>
       ) : (
         <p>Loading...</p>

@@ -1,6 +1,4 @@
-// TechTransferSection.jsx
 import { NASA_API_KEY } from '../../constants';
-
 import React, { useState, useEffect } from 'react';
 
 const TechTransferSection = () => {
@@ -13,13 +11,11 @@ const TechTransferSection = () => {
       try {
         setIsLoading(true);
         setError(null);
-
         const response = await fetch(`https://api.nasa.gov/techtransfer/patent/?engine&api_key=${NASA_API_KEY}`);
-        
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-
         const data = await response.json();
         setPatents(data.results || []);
       } catch (error) {
@@ -29,7 +25,6 @@ const TechTransferSection = () => {
         setIsLoading(false);
       }
     };
-
     fetchPatents();
   }, []);
 
@@ -43,11 +38,11 @@ const TechTransferSection = () => {
   };
 
   return (
-    <div>
+    <div className="tech-transfer-container">
       <h1>NASA Tech Transfer Patents</h1>
-      <ul>
+      <ul className="patent-list">
         {patents.map((patent, index) => (
-          <li key={patent[0]}>
+          <li key={patent[0]} className="patent-item">
             <h3>{stripHtml(patent[2])}</h3>
             <p><strong>ID:</strong> {patent[0]}</p>
             <p><strong>NASA ID:</strong> {patent[1]}</p>

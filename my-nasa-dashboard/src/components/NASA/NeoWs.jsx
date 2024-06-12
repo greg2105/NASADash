@@ -15,15 +15,13 @@ const NearEarthObjects = () => {
         console.error('Error fetching asteroid data:', error);
       }
     };
-
     fetchData();
   }, []);
 
   return (
-    <div>
+    <div className="neo-container">
       {asteroidData ? (
-        <div>
-          {/* Render the asteroid data */}
+        <div className="neo-data-container">
           <pre>{JSON.stringify(asteroidData, null, 2)}</pre>
         </div>
       ) : (

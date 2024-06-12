@@ -1,24 +1,29 @@
-// components/SpeechBubble.jsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../styles/SpeechBubble.css';
 
-const SpeechBubble = ({ text, speed = 120, onFinishTyping }) => {
+const SpeechBubble = ({ text, speed = 90 }) => {
   const [displayText, setDisplayText] = useState('');
   const [isTypingComplete, setIsTypingComplete] = useState(false);
+  const timeoutIdRef = useRef(null);
 
   useEffect(() => {
-    let timeoutId;
+    setDisplayText('');
+    setIsTypingComplete(false);
+  }, [text]);
+
+  useEffect(() => {
+    if (isTypingComplete) return;
+
     if (displayText.length < text.length) {
-      timeoutId = setTimeout(() => {
+      timeoutIdRef.current = setTimeout(() => {
         setDisplayText(text.slice(0, displayText.length + 1));
       }, speed);
-    } else if (!isTypingComplete) {
+    } else {
       setIsTypingComplete(true);
-      if (onFinishTyping) onFinishTyping();
     }
 
-    return () => clearTimeout(timeoutId);
-  }, [displayText, text, speed, isTypingComplete, onFinishTyping]);
+    return () => clearTimeout(timeoutIdRef.current);
+  }, [displayText, text, speed, isTypingComplete]);
 
   return (
     <div className="speech-bubble-container">

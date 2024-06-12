@@ -18,38 +18,42 @@ const Earth = () => {
   };
 
   return (
-    <div>
+    <div className="earth-container">
       <h2>Earth Imagery</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Latitude:
-          <input
-            type="text"
-            value={lat}
-            onChange={(e) => setLat(e.target.value)}
-          />
-        </label>
-        <label>
-          Longitude:
-          <input
-            type="text"
-            value={lon}
-            onChange={(e) => setLon(e.target.value)}
-          />
-        </label>
-        <label>
-          Date (YYYY-MM-DD):
-          <input
-            type="text"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-          />
-        </label>
-        <button type="submit">Get Imagery</button>
-      </form>
+      <div className="earth-form-container">
+        <form onSubmit={handleSubmit}>
+          <label>
+            Latitude:
+            <input
+              type="text"
+              value={lat}
+              onChange={(e) => setLat(e.target.value)}
+            />
+          </label>
+          <label>
+            Longitude:
+            <input
+              type="text"
+              value={lon}
+              onChange={(e) => setLon(e.target.value)}
+            />
+          </label>
+          <label>
+            Date (YYYY-MM-DD):
+            <input
+              type="text"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+            />
+          </label>
+          <button type="submit">Get Imagery</button>
+        </form>
+      </div>
       {earthData && (
         <div>
-          {earthData.url && <img src={earthData.url} alt="Earth Imagery" />}
+          <div className="earth-image-container">
+            {earthData.url && <img src={earthData.url} alt="Earth Imagery" />}
+          </div>
           {earthData.date && <p>Date: {earthData.date}</p>}
         </div>
       )}
