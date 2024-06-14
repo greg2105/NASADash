@@ -1,6 +1,5 @@
-// src/components/ContentArea.jsx
 import React from 'react';
-import ApodSection from './NASA/APOD'; // Make sure the path is correct
+import ApodSection from './NASA/APOD';
 import './ContentArea.css';
 
 const ContentArea = () => {

@@ -48,8 +48,8 @@ body, html {
 }
 
 .apod-container p {
-  max-height: 700px; /* Adjust this value to your desired maximum height */
-  overflow-y: auto; /* This will add a scrollbar when the text exceeds the max-height */
+  max-height: 700px; 
+  overflow-y: auto; 
   z-index: 9999;
 }
 
@@ -544,9 +544,9 @@ body, html {
   right: 0;
   width: 30%;
   height: 100%;
-  background-color: rgba(116, 116, 116, 0.062); /* Semi-transparent background color */
-  padding: 20px; /* Add some padding */
-  color: #fff; /* Set the text color */
+  background-color: rgba(116, 116, 116, 0.062);
+  padding: 20px;
+  color: #fff;
   z-index: 999;
 }
 
@@ -562,14 +562,14 @@ body, html {
 
 .speech-bubble {
   position: relative;
-  background: rgba(109, 107, 127, 0.3); /* Semi-transparent blue with 70% opacity */
+  background: rgba(109, 107, 127, 0.3);
   border-radius: 15px;
   padding: 15px;
   font-family: FreeMono, monospace;
   font-size: 0.9rem;
-  color: rgba(224, 224, 224, 0.8); /* Light gray text with 80% opacity */
-  box-shadow: 0 4px 15px rgba(0, 128, 255, 0.3); /* Blue glow with 30% opacity */
-  border: 2px solid rgba(81, 60, 95, 0.8); /* Neon cyan border with 80% opacity */
+  color: rgba(224, 224, 224, 0.8);
+  box-shadow: 0 4px 15px rgba(0, 128, 255, 0.3);
+  border: 2px solid rgba(81, 60, 95, 0.8); 
 }
 
 .speech-bubble::after {
@@ -580,13 +580,13 @@ body, html {
   width: 0;
   height: 0;
   border: 15px solid transparent;
-  border-right-color: rgba(81, 60, 95, 0.8); /* Neon cyan border color with 80% opacity */
+  border-right-color: rgba(81, 60, 95, 0.8);
   border-left: none;
   margin-top: -15px;
 }
 .cursor {
   animation: blink 1s infinite;
-  color: #6d6b7f;  /* Neon cyan cursor */
+  color: #6d6b7f;
 }
 
 
@@ -621,7 +621,6 @@ body, html {
   width: 30vw;
   max-width: 300px;
   z-index: 3;
-  /* transform: translate(calc(50% - 100px), calc(20% - 50px)); */
 }
 
 .astronaut-image {
@@ -673,7 +672,7 @@ body, html {
 }
 
 .app-title {
-  font-family: 'Orbitron', sans-serif; /* A futuristic font, make sure to import it */
+  font-family: 'Orbitron', sans-serif; 
   font-size: 3rem;
   color: #ffffff;
   text-shadow: 
@@ -703,7 +702,6 @@ body, html {
   }
 }
 
-/* Rest of your styles remain the same */
 
 .starry-sky-container {
   position: absolute;
@@ -730,7 +728,3 @@ canvas {
   width: 100%;
   height: 100%;
 }
-
-/* You can remove or comment out styles that are not directly 
-   related to the layout of the main components (app-container, 
-   planet-model-container, astronaut-container, etc.) to reduce confusion */

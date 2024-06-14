@@ -7,7 +7,6 @@ const Exoplanet = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Construct the ADQL query
         const query = `
           SELECT pl_name, pl_masse, ra, dec
           FROM ps
@@ -15,7 +14,6 @@ const Exoplanet = () => {
             AND pl_masse BETWEEN 0.5 AND 2.0
         `;
 
-        // Fetch data from the Exoplanet Archive API
         const data = await fetchExoplanetDataFromAPI(query, 'votable');
         setExoplanetData(data);
       } catch (error) {

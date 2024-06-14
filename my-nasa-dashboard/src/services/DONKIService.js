@@ -6,7 +6,7 @@ export const fetchDONKIData = async (endpoint, params = {}) => {
   try {
     const queryParams = new URLSearchParams({
       ...params,
-      api_key: NASA_API_KEY, // Replace with your actual API key
+      api_key: NASA_API_KEY, 
     });
 
     const response = await fetch(`${API_URL}/${endpoint}?${queryParams.toString()}`);

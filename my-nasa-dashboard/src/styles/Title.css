@@ -8,9 +8,9 @@
 
 .title-container {
   position: absolute;
-  top: 20px; /* Adjust this value as needed */
+  top: 20px; 
   left: 50%;
-  transform: translateX(0%); /* Center the container horizontally */
+  transform: translateX(0%); 
   width: 100%;
   text-align: center;
   padding-right: 20px;
@@ -29,7 +29,7 @@
 }
 
 .btn {
-  margin-left: 10px; /* Add some spacing between the title and buttons */
+  margin-left: 10px;
   padding: 5px 8px;
   font-family: 'Orbitron', sans-serif;
   font-size: 14px;
@@ -50,8 +50,8 @@
 
 .icon {
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
-  width: 18px; /* Adjust this value to your desired size */
-  height: 18px; /* Adjust this value to your desired size */
+  width: 18px; 
+  height: 18px; 
 }
 
 .nav {

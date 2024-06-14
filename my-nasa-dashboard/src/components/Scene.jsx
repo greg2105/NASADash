@@ -31,13 +31,10 @@ const Scene = ({onHotspotClicked}) => {
 
   useFrame((state, delta) => {
     if (groupRef.current) {
-      // Interpolate the rotation
-      const step = 0.05; // Adjust for smoother or faster rotation
+      const step = 0.05; 
       groupRef.current.rotation.x += (targetRotation.x - groupRef.current.rotation.x) * step;
       groupRef.current.rotation.y += (targetRotation.y - groupRef.current.rotation.y) * step;
       groupRef.current.rotation.z += (targetRotation.z - groupRef.current.rotation.z) * step;
-  
-      // Update current rotation state (if needed)
       setCurrentRotation(new Euler(groupRef.current.rotation.x, groupRef.current.rotation.y, groupRef.current.rotation.z));
     }
   });
@@ -52,40 +49,34 @@ const Scene = ({onHotspotClicked}) => {
     { latitude: 50, longitude: 10, label: '7' },
     { latitude: 45, longitude: 40, label: '8' },
     { latitude: 20, longitude: 15, label: '9' },
-    // Add more ring data here
   ];
 
   const [circleColors, setCircleColors] = useState(Array(ringData.length).fill("white"));
 
   const handleHotspotClick = (index) => {
-    handleHotspotClicked(index); // Call the onHotspotClicked prop function with the clicked index
+    handleHotspotClicked(index); 
   };
 
   const calculateTargetRotation = (latitude, longitude) => {
     const phi = (90 - latitude) * (Math.PI / 180);
     const theta = (longitude + 180) * (Math.PI / 180);
   
-    // Calculate the point on the sphere (hotspot position)
     const x = -Math.sin(phi) * Math.cos(theta);
     const y = Math.cos(phi);
     const z = Math.sin(phi) * Math.sin(theta);
   
-    // Create a vector pointing from the center to the hotspot
     const hotspotVector = new Vector3(x, y, z);
   
-    // Use the camera's position vector directly (no need to negate)
     const targetVector = camera.position.clone().normalize().negate();
   
-    // Calculate the rotation needed to align -hotspotVector with targetVector
     const quaternion = new Quaternion();
     quaternion.setFromUnitVectors(hotspotVector.clone().negate(), targetVector);
   
-    // Convert quaternion to Euler angles
     const euler = new Euler().setFromQuaternion(quaternion);
   
     return euler;
   };
-  // Function to convert latitude and longitude to a point on the sphere
+
   const latLongToPoint = (latitude, longitude, radius) => {
     const phi = (90 - latitude) * (Math.PI / 180);
     const theta = (longitude + 180) * (Math.PI / 180);
@@ -95,8 +86,6 @@ const Scene = ({onHotspotClicked}) => {
     return new Vector3(x, y, z);
   };
 
-
-  // Function to calculate rotation to make the ring tangential to the sphere
   const calculateTangentialRotation = (position) => {
     const normal = position.clone().normalize();
     const tangent = new Vector3(-normal.y, normal.x, 0).normalize();
@@ -113,19 +102,17 @@ const Scene = ({onHotspotClicked}) => {
     return euler;
   };
 
-  // Override the material to ensure it's set up correctly
   const earthMaterial = new MeshStandardMaterial({
     map: materials['Scene_-_Root'].map,
     normalMap: materials['Scene_-_Root'].normalMap,
     roughness: 0.5,
     metalness: 0.2,
-    wireframe: false, // Ensure wireframe is off
+    wireframe: false, 
   });
 
   return (
     <group ref={groupRef}>
       <mesh geometry={nodes.Object_4.geometry} material={earthMaterial} scale={1.128} castShadow receiveShadow />
-      {/* Add a backside mesh to simulate atmosphere */}
       <mesh geometry={nodes.Object_4.geometry} scale={1.132}>
         <meshBasicMaterial color="#90a3ff" transparent opacity={0.2} side={BackSide} />
       </mesh>
@@ -138,14 +125,14 @@ const Scene = ({onHotspotClicked}) => {
             <FloatingCircle
               position={largeRingPosition}
               radius={0.04}
-              color={circleColors[index]} // Use the dynamic circleColor state
+              color={circleColors[index]}
               rotation={rotation}
               pulseSpeed={2}
             />
             <FloatingCircle
               position={smallRingPosition}
               radius={0.01}
-              color={circleColors[index]} // Use the dynamic circleColor state
+              color={circleColors[index]}
               rotation={rotation}
               pulseSpeed={2}
             />
@@ -153,9 +140,9 @@ const Scene = ({onHotspotClicked}) => {
           position={smallRingPosition} 
           onClick={() => {
           console.log(`Hotspot ${index + 1} clicked: ${ring.label}`);
-          const newColors = [...circleColors]; // Create a copy of the array
-          newColors[index] = "purple"; // #513c5f
-          setCircleColors(newColors); //
+          const newColors = [...circleColors]; 
+          newColors[index] = "purple"; 
+          setCircleColors(newColors);
           setSelectedHotspotIndex(index);
           const newTargetRotation = calculateTargetRotation(ring.latitude, ring.longitude);
           setTargetRotation(newTargetRotation);

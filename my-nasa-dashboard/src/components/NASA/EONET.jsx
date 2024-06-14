@@ -28,7 +28,6 @@ const EONET = () => {
               {event.geometry && event.geometry.length > 0 && (
                 <p>Date: {event.geometry[0].date}</p>
               )}
-              {/* Render additional event details as needed */}
             </div>
           ))}
         </div>

@@ -7,7 +7,6 @@ const WMTSSection = () => {
 
   useEffect(() => {
     const fetchTileURL = () => {
-      // Example tile parameters
       const tileMatrixSet = 'EQ/LRO_WAC_Mosaic_Global_303ppd_v02';
       const tileMatrix = 'default028mm';
       const tileRow = 0;

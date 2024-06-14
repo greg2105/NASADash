@@ -7,8 +7,8 @@ const NearEarthObjects = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const startDate = '2023-05-27'; // Replace with your desired start date
-        const endDate = '2023-05-28'; // Replace with your desired end date
+        const startDate = '2023-05-27'; 
+        const endDate = '2023-05-28';
         const data = await fetchAsteroidData(startDate, endDate);
         setAsteroidData(data);
       } catch (error) {

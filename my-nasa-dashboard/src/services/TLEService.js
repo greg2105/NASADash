@@ -7,7 +7,6 @@ export const searchTLEBySatelliteName = async (query) => {
     return data;
   } catch (error) {
     console.error('Error searching TLE by satellite name:', error);
-    // Don't try to log response here, it might not exist
     throw error;
   }
 };

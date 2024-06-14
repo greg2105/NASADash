@@ -23,7 +23,6 @@ import WMTSSection from './src/components/NASA/WMTS';
 import CloseApproachSection from './src/components/NASA/SSDCNEOS';
 
 const Dashboard = ({ data }) => {
-  // Render the dashboard content based on the data received from the hotspot click
   return (
     <div>
       <h2>{data.name}</h2>

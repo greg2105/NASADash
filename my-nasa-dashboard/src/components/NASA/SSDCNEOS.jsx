@@ -20,11 +20,9 @@ const CloseApproachSection = () => {
       try {
         setIsLoading(true);
         setError(null);
-        // Search for close approaches of asteroid 433 Eros
         const erosResponse = await fetch('http://localhost:3000/api/ssd/cad/asteroid/433?dateMin=2000-01-01&dateMax=2100-01-01&distMax=0.2');
         const erosData = await erosResponse.json();
         setAsteroidData(erosData);
-        // Search for Earth close-approaches within 10 lunar distances
         const earthResponse = await fetch('http://localhost:3000/api/ssd/cad/earth?distMax=10LD&dateMin=2020-01-01&sort=dist');
         const earthData = await earthResponse.json();
         setEarthData(earthData);

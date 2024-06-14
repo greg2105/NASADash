@@ -7,7 +7,6 @@ const RoverPhotosSection = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch photos from the Mars Rover Photos API
         const rover = 'curiosity';
         const params = {
           sol: 1000,
