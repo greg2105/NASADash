@@ -1,6 +1,3 @@
-// SatelliteSituationCenterService.js
-import { NASA_API_KEY } from '../constants';
-
 const API_URL = 'http://sscweb.gsfc.nasa.gov/WS/sscr/2';
 
 export const echoDataRequest = async (xmlRequest) => {

@@ -1,4 +1,3 @@
-// WMTSService.js
 const API_URL = 'https://moontrek.jpl.nasa.gov/trektiles/Moon';
 
 export const getTileURL = (tileMatrixSet, tileMatrix, tileRow, tileCol) => {

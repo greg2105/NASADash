@@ -1,4 +1,3 @@
-/* src/styles/App.css */
 body, html {
   margin: 0;
   padding: 0;
@@ -23,7 +22,6 @@ body, html {
   overflow: hidden;
 }
 
-/* APOD */
 .apod-container h3 {
   margin-top: 0;
   font-size: 1.5rem;
@@ -63,7 +61,6 @@ body, html {
   border-radius: 8px;
 }
 
-/* DONKI */
 .donki-container {
   display: flex;
   flex-direction: column;
@@ -115,7 +112,6 @@ body, html {
   font-size: 0.9rem;
 }
 
-/* EARTH */
 .earth-container {
   display: flex;
   flex-direction: column;
@@ -183,7 +179,6 @@ body, html {
   text-align: center;
 }
 
-/* EONET */
 .eonet-container {
   display: flex;
   flex-direction: column;
@@ -229,7 +224,6 @@ body, html {
   font-size: 0.9rem;
 }
 
-/* EPIC */
 .epic-container {
   display: flex;
   flex-direction: column;
@@ -296,7 +290,6 @@ body, html {
   margin-top: 10px;
 }
 
-/* IVL */
 .image-repository-container {
   display: flex;
   flex-direction: column;
@@ -348,7 +341,6 @@ body, html {
   text-decoration: underline;
 }
 
-/* MRP */
 .rover-photos-container {
   display: flex;
   flex-direction: column;
@@ -398,7 +390,6 @@ body, html {
   text-align: center;
 }
 
-/* NeoWs */
 .neo-container {
   display: flex;
   flex-direction: column;
@@ -427,7 +418,6 @@ body, html {
   font-size: 0.9rem;
 }
 
-/* SSDCNEOS */
 .close-approach-container {
   display: flex;
   flex-direction: column;
@@ -487,7 +477,6 @@ body, html {
   text-align: center;
 }
 
-/* Tech Transfer */
 .tech-transfer-container {
   display: flex;
   flex-direction: column;
@@ -588,7 +577,6 @@ body, html {
   animation: blink 1s infinite;
   color: #6d6b7f;
 }
-
 
 @keyframes blink {
   0%, 100% { opacity: 1; }

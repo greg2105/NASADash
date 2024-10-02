@@ -1,4 +1,3 @@
-// ImageRepositoryService.js
 const API_URL = 'https://images-api.nasa.gov';
 
 export const searchImages = async (query) => {

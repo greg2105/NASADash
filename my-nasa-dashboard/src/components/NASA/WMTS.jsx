@@ -1,4 +1,3 @@
-// WMTSSection.jsx
 import React, { useState, useEffect } from 'react';
 import { getTileURL } from '../../services/WMTSService';
 

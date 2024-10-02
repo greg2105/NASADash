@@ -1,18 +1,16 @@
 import requests
 
-# Replace the study IDs and other parameters as needed
 endpoint = "https://osdr.nasa.gov/osdr/data/osd/files/87-95,137,153.2"
 params = {
-    "page": 0,  # Set the page number (optional)
-    "size": 25,  # Set the number of results per page (optional)
-    "all_files": "true"  # Include hidden files (optional)
+    "page": 0,  
+    "size": 25,  
+    "all_files": "true"  
 }
 
 response = requests.get(endpoint, params=params)
 
 if response.status_code == 200:
     data = response.json()
-    # Process the data as needed
     for study in data["study_files"]:
         study_id = study["study_id"]
         study_version = study["study_version"]

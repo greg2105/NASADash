@@ -1,4 +1,3 @@
-// RoverPhotosService.js
 import { NASA_API_KEY } from '../constants';
 
 const API_URL = 'https://api.nasa.gov/mars-photos/api/v1';

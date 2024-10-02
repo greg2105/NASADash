@@ -1,5 +1,3 @@
-// CADService.js
-
 const SERVER_URL = 'http://localhost:3000'; 
 
 const fetchFromServer = async (url) => {
